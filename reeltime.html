@@ -24,7 +24,7 @@ function date_heure(id)
         {
                 s = "0"+s;
         }
-        resultat = 'Сегодня'+jours[jour]+' '+j+' '+mois[moi]+' '+annee+ <br>' Это '+h+':'+m+':'+s;</br>
+        resultat = '  Сегодня  '+jours[jour]+' '+j+' '+mois[moi]+' '+annee+ ' времия '  +h+':'+m+':'+s;
         document.getElementById(id).innerHTML = resultat;
         setTimeout('date_heure("'+id+'");','1000');
         return true;
