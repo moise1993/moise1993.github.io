@@ -8,7 +8,7 @@ function date_heure(id)
         mois = new Array('Январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь');
         j = date.getDate();
         jour = date.getDay();
-        jours = new Array('Воскресенье', 'понедельник', 'вторник', ' среда', 'четверг', 'пятница', 'суббота');
+        jours = new Array('Воскресенье', 'Понедельник', 'Вторник', ' Среда', 'Четверг', 'Пятница', 'Суббота');
         h = date.getHours();
         if(h<10)
         {
@@ -24,14 +24,14 @@ function date_heure(id)
         {
                 s = "0"+s;
         }
-        resultat = 'Сегодня'+jours[jour]+' '+j+' '+mois[moi]+' '+annee+' Это '+h+':'+m+':'+s;
+        resultat = 'Сегодня'+jours[jour]+' '+j+' '+mois[moi]+' '+annee+ <br>' Это '+h+':'+m+':'+s;</br>
         document.getElementById(id).innerHTML = resultat;
         setTimeout('date_heure("'+id+'");','1000');
         return true;
 }
  </script>  
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Отображение даты и времени в режиме реального времени в javascript</title>
