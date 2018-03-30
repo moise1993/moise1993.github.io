@@ -24,10 +24,10 @@
          secondes = Math.floor(total_secondes - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
  
          var et = "et";
-         var mot_jour = "jours,";
-         var mot_heure = "heures,";
-         var mot_minute = "minutes,";
-         var mot_seconde = "secondes";
+         var mot_jour = "Дни,";
+         var mot_heure = "Часы,";
+         var mot_minute = "Минут,";
+         var mot_seconde = "Секунд";
  
         if (jours == 0)
         {
@@ -36,7 +36,7 @@
          }
         else if (jours == 1)
          {
-            mot_jour = "jour,";
+            mot_jour ="Дни,";
          }
  
          if (heures == 0)
@@ -46,7 +46,7 @@
          }
          else if (heures == 1)
          {
-             mot_heure = "heure,";
+             mot_heure = "Часы,";
          }
           if (minutes == 0)
          {
@@ -55,7 +55,7 @@
          }
          else if (minutes == 1)
          {
-             mot_minute = "minute,";
+             mot_minute = "Минут,";
          }
  
          if (secondes == 0)
@@ -66,7 +66,7 @@
          }
          else if (secondes == 1)
          {
-             mot_seconde = "seconde";
+             mot_seconde = "Секунд";
          }
  
          if (minutes == 0 && heures == 0 && jours == 0)
