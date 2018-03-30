@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<main>
 <bookstore>
 
   <book category="cooking">
@@ -34,3 +35,5 @@
   </book>
 
 </bookstore>
+</main>
+
