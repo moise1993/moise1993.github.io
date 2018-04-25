@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<style type="text/css">
+
+body {
+    background-image:url("data:image/gif;base64,R0lGODlhAwADAIAAAOX29sfY2CH5BAAAAAAALAAAAAADAAMAAAIDDG5YADs=");
+    background-color:gray;
+    font-size:12px;
+}
+
+table{
+background-color:#3Aaa9F;
+color:white;
+}
+
+td{
+border:thin solid black;
+text-align:center;
+}
+
+.tdlec{
+width:100px;
+cursor:pointer;
+background-color:#3Aaa9F;
+}
+
+.pousse{
+width: 0px;
+height: 0px;
+border-style: solid;
+border-width: 5px 0 5px 10px;
+border-color: transparent transparent transparent #fafafa;
+margin:auto;
+}
+
+.pousse:hover{
+opacity:0.5;
+}
+
+.tdsup{
+width:100px;
+background-color:#3Aaa9F;
+}
+
+.tdtitre{
+overflow:hidden;
+width:500px;
+text-align:center;
+margin:auto;
+background-color:#3Aaa9F;
+}
+
+#liste{
+max-height:350px;
+overflow-y:scroll;
+margin:auto;
+}
+
+#tabentete{
+margin-left:0px;
+}
+
+.th1,.th2,.th3{
+background-color:#3Aaa9F;
+color:black;
+font-size:13px;
+text-align:center;
+border:thin solid black;
+}
+
+.th1{
+width:412px;
+}
+
+.th2{
+width:76px;
+cursor:pointer;
+}
+
+.th2:hover{
+background-color:#3Aaa9F;
+color:red;
+}
+
+.th3{
+width:75px
+}
+
+#contetab{
+width:600px;
+
+margin-top:-300px;
+margin-left:370px;
+font-size:14px;
+background-color:#3Aaa9F;
+}
+
+input{
+background-color:#3Aaa9F;
+color:white;
+}
+
+#cssmenu ul {height:40px;margin: 0; padding: 7px 6px 0; background: #3Aaa9F ; border-radius: 1em; font: normal 1.2em Arial, Helvetica, sans-serif;border-radius: 5px; -webkit-box-shadow: 0 1px 3px rgba(0,0,0, .4); -moz-box-shadow: 0 1px 3px rgba(0,0,0, .4);}
+#cssmenu li {cursor:pointer;margin: 0 5px; padding: 0 0 8px; float: left; position: relative; list-style: none;font: normal 0.8em Arial, Helvetica, sans-serif; }
+#cssmenu div,
+#cssmenu div{font-weight: bold; color: #e7e5e5; text-decoration: none; display: block; padding:  8px 20px; margin: 0; border-radius: 5px;text-shadow: 0 1px 1px rgba(0,0,0, .3); }
+#cssmenu div:hover{background: #000; color: #fff;}
+
+#cssmenu li:hover li a {background: none; border: none; color: #666; -webkit-box-shadow: none; -moz-box-shadow: none;}
+#cssmenu ul li:hover > ul {display: block;}
+#cssmenu ul ul {height:80px;display: none; margin: 0; padding: 0; width: 120px; position: absolute; top: 39px; left: 0; background: #3Aaa9F; border-radius: 5px; -webkit-box-shadow: 0 1px 3px rgba(0,0,0, .3); -moz-box-shadow: 0 1px 3px rgba(0,0,0, .3); box-shadow: 0 1px 3px rgba(0,0,0, .3);}
+.ppin{width:90px; height:25px; overflow:hidden;display:block}
+.ppina{opacity:0;cursor:pointer;}
+.ppina:hover > .ppdiv{background: black;}
+.ppdiv{position:absolute;height:20px;width:70px;top:0px;background: #3Aaa9F;}
+</style>
+<script type="text/javascript">
+
+//-------------------------------------------------------------
+//  Nom Document : generateur
+//  Auteur       : kazma
+//  Objet        : generateur   http://www.javascriptfr.com/
+//  Création     : 27.08.2013
+//-------------------------------------------------------------
+
+
+var tbid = new Array
+var dvr='vide'
+
+function ajouter(){
+
+    var ts=document.getElementById('tabsee');
+
+    var valeur=document.getElementById('test1').value;
+    var posi=valeur.lastIndexOf('/',valeur.length)+1;
+    var valeur2=valeur.substring(posi,valeur.length-4);
+    
+    tbid.push(valeur);
+    tabinsert(valeur,valeur2,posi)
+    document.getElementById('test1').value='';
+    }
+    
+    
+    
+    function tabinsert(valeur,valeur2,posi){
+
+    var ts=document.getElementById('tabsee');
+    
+    ts.insertRow(-1);
+    var nbrow=ts.rows.length-1;
+    
+    ts.rows[nbrow].insertCell(0);
+    ts.rows[nbrow].cells[0].appendChild(document.createTextNode(valeur2));
+    ts.rows[nbrow].cells[0].setAttribute('class','tdtitre');    
+    
+    ts.rows[nbrow].insertCell(1);
+    var cc=document.createElement('input');
+    cc.type='checkbox';
+    ts.rows[nbrow].cells[1].appendChild(cc);
+    ts.rows[nbrow].cells[1].setAttribute('class','tdsup');
+    
+    
+    
+    ts.rows[nbrow].insertCell(2);
+    var cc=document.createElement('audio');
+    var source=document.createElement('source');
+    source.src=valeur.substring(0,valeur.length-4)+'.ogg';
+    source.setAttribute('type','audio/ogg');
+    cc.appendChild(source);
+    
+    source=document.createElement('source');
+    source.src=valeur.substring(posi,valeur.length-4)+'.mp3';
+    source.setAttribute('type','audio/mp3');
+    cc.appendChild(source);
+    
+    var dv=document.createElement('div');
+    dv.setAttribute('class','pousse');
+    ts.rows[nbrow].cells[2].appendChild(dv)
+    
+    ts.rows[nbrow].cells[2].setAttribute('onclick','marchearret(this)');
+    ts.rows[nbrow].cells[2].setAttribute('class','tdlec');
+    ts.rows[nbrow].cells[2].appendChild(cc);
+    
+}
+
+
+function supp(){
+
+    var ts=document.getElementById('tabsee');
+    var iii=0;
+
+    while (iii<ts.rows.length){
+
+        if(ts.rows[iii].cells[1].childNodes[0].checked){
+            ts.deleteRow(iii);
+            tbid.splice(iii,1);
+            iii--;
+        }
+        iii++;
+    }
+}
+
+function creatab(){
+
+    document.getElementById('tb').value="";
+    
+    var x='';
+    
+    for(var i=0;i<tbid.length;i++){
+        if(i<tbid.length-1){
+            x+="'"+tbid[i]+"',";
+        }
+        else{
+            x+="'"+tbid[i]+"'";
+        }
+    }
+    document.getElementById('tb').value="tbtitre:["+x+"],";
+}
+
+function ajout_liste(){
+
+    var tbid_2=dvr.split(",");
+
+    for(var i=0;i<tbid_2.length;i++){
+
+        tbid.push(tbid_2[i])
+        
+        var valeur=tbid_2[i];
+
+        var posi=valeur.lastIndexOf('/',valeur.length)+1;
+        var valeur2=valeur.substring(posi,valeur.length-4);
+
+        tabinsert(valeur,valeur2,posi)
+
+    }
+
+}
+
+
+
+function init(expediteur){
+
+    var ts=document.getElementById('tabsee');
+    ts.innerHTML = '';
+    
+    if(expediteur=='navigateur'){
+    
+    if(localStorage.enregistrement){
+        tbid=localStorage.enregistrement.split(",");
+    }
+    else{
+    alert('pas de fichier navigateur');
+    return false;
+    }
+    
+    }
+
+    else{
+    tbid=dvr.split(",");
+    }
+
+    for(var i=0;i<tbid.length;i++){
+
+        var valeur=tbid[i];
+
+        var posi=valeur.lastIndexOf('/',valeur.length)+1;
+        var valeur2=valeur.substring(posi,valeur.length-4);
+
+        tabinsert(valeur,valeur2,posi)
+    }
+
+}
+
+function marchearret(lui){
+
+var tbau=lui.parentNode.parentNode.getElementsByTagName('audio');
+var el=lui.getElementsByTagName('audio')[0];
+
+for(var i=0;i<tbau.length;i++){
+
+        if(!tbau[i].paused && tbau[i] != el){
+            tbau[i].pause();
+        }
+        
+    }
+
+ if(el.paused){
+    el.play();
+    }
+    else{
+    el.pause();
+    }
+}
+
+function enregistrer(){
+    localStorage.enregistrement=tbid.toString();
+    document.getElementById('tb').value='';
+    document.getElementById('tb').value=tbid.toString();
+}
+
+        
+function charger(arg){
+    
+    var fichier = document.getElementById('fileinput').files;
+
+    var charge=new FileReader();
+    
+    charge.readAsText(fichier[0]);
+    
+    charge.onloadend = function(e){
+        dvr= e.target.result;
+        
+        init('fichier');
+        
+    }
+    
+}
+    
+function charger2(arg){
+    
+    var fichier = document.getElementById('fileinput2').files;
+
+    var charge=new FileReader();
+    
+    charge.readAsText(fichier[0]);
+    
+    charge.onloadend = function(e){
+        dvr= e.target.result;
+        
+        ajout_liste()
+    }
+    
+}
+ 
+function playdis(){
+
+    if(document.getElementById('aide').style.display=='none'){
+    document.getElementById('aide').style.display='block';
+    }
+    else{
+    document.getElementById('aide').style.display='none';
+    }
+}
+
+var kdrag={
+
+elemdrag:null,
+decx:null,
+decy:null,
+rar:true,
+
+sp:function(s){
+
+if(kdrag.rar && arguments.length!=0){
+kdrag.elemdrag=s.currentTarget.parentNode
+
+var dbe=(navigator.vendor) ? document.body : document.documentElement;
+
+kdrag.decx=s.clientX + dbe.scrollLeft - kdrag.elemdrag.offsetLeft
+kdrag.decy=s.clientY + dbe.scrollTop - kdrag.elemdrag.offsetTop
+
+s.preventDefault();
+document.documentElement.addEventListener("mousemove", kdrag.posi, false)
+
+kdrag.rar=false;
+}
+
+if(kdrag.rar==false && arguments.length==0){
+document.documentElement.removeEventListener("mousemove", kdrag.posi, false)
+kdrag.rar=true;
+}
+},
+
+posi:function(s){
+
+var dde=(navigator.vendor) ? document.body : document.documentElement;
+
+var setX =s.clientX + dde.scrollLeft;
+var setY =s.clientY + dde.scrollTop;
+kdrag.elemdrag.style.left=(setX-kdrag.decx)+"px";
+kdrag.elemdrag.style.top=(setY-kdrag.decy)+"px";
+}
+}
+
+</script>
+</head>
+<body>
+
+
+<div id='cssmenu'>
+<ul>
+   <li><div><span>charger fichier</span></div>
+        <ul>
+         <li ><div onclick='init("navigateur")'><span>navigateur</span></div></li>
+         <li ><div class='ppdiv'>parcourir</div><span class='ppin'><input class='ppina'type='file' id='fileinput' onchange='charger()'></span></li>
+        <li ><div class='ppdiv'>inserer liste</div><span class='ppin'><input class='ppina'type='file' id='fileinput2' onchange='charger2()'></span></li>
+        </ul>
+    </li>
+   
+     <li><div onclick="enregistrer()"><span>enregistrer</span></div>
+     
+   </li>
+     
+   <li><div onclick="creatab()"><span>generer array</span></div>
+     
+   </li> 
+     
+   <li><div><span>a propos</span></div>
+   </li>
+   
+   <li><div onclick='playdis()'><span>aide</span></div>
+   </li>
+   
+</ul>
+</div>
+
+
+<br>
+<div>
+<span style='font-size:20px'>adresse</span>
+<br><br>
+<input style='height:20px;width:500px;' id='test1'>
+
+<br><br>
+<button style='display:block;' onclick="ajouter()">ajouter</button>
+</div>
+<br><br>
+<textarea id='tb' style='height:300px;width:350px'></textarea>
+<br><br>
+
+<div id='contetab'>
+<table id='tabentete'>
+<tr id='entete'><th class='th1'>titre</th><th class='th2' onclick='supp()'>retirer</th><th class='th3' onclick='lecture()'>lecture</th></tr>
+</table>
+<div id='liste'>
+<table id='tabsee'>
+</table>
+</div>
+</div>
+
+<div id='aide' style='border:1px ridge #aaa;display:none;height:370px;width:500px;position:absolute;left:30%;top:20%;border-radius:5px'>
+ <div  onmousedown='kdrag.sp(event);' onmouseup="kdrag.sp()" style='height:30px;width:100%;background-color:#3Aaa9F;border-radius: 5px'><span onclick='playdis()' style='float:right;cursor:pointer;color:blue;margin-right:10px'>fermer</span></div>
+<div style='overflow-y:scroll;height:340px;width:100%;font-size:18px;background-color:gray;'>
+ 
+ <div style='margin:10px;'>
+ 
+ <br> <br>
+ <h3>mode d'emploi</h3>
+
+ le generateur sert a cree un array javascript contenant une liste de lien de tous les titres choisi il sert aussi a sauvegarder la liste pour une utilisation ulterieur et permet de gerer cete liste en supprimant ou rajoutant des liens et permet aussi de tester si ces liene fonctionnent
+ <br> <br>
+<h3> menu</h3>
+
+ charger fichier : sert a charger les donné qui on éte soit sauvegardé dans le navigateur(navigateur) soit sauvegardé dans un fichier(parcourir). quand a l'option 'inserer liste' elle sert a rajouter une liste dans la liste courante.
+ <br> <br>
+ enregistrer : enregistre les donné dans le navigateur et cree dans la fenetre de saisie les donné a sauvegarder par copié collé dans un fichier texte car on ne peut pas sauvegader les donnés a partir du navigateur vers un fichier externe; pas mesure de securité il est preferable de faire une sauvegarde dans un fichier texte.
+ <br> <br>
+ generer array : genere le tableau contenant les liens des titres et qui devra etre mis en debut du fichier javascript du player par copié collé
+<br><br>
+
+<h3>fenetre d'adresse</h3>
+
+fenettre de saisi adresse : sert a indiquer l'adresse de chaques fichiers en appuyant su le bouton ajouter on ajoute le fichier au array
+
+<br> <br>
+<h3>fenetre de titre</h3>
+
+titre : nom de chaque titre
+<br> <br>
+retirer : permet de selectionner les titres a supprimer et en cliquant sur retirer les supprimes de la liste.
+<br> <br>
+lecture : sert a savoir si le lien est correcte en cliquant sur la fleche permet l'écoute du titre en court et si la lecture ce fait c'est que le lien est valide.
+<br> <br>
+</div>
+ </div>
+ </div>
+ 
+</body>
+</html>
