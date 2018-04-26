@@ -55,7 +55,8 @@ input[type=submit]:hover {
     clear: both;
 }
 
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+/* 
+Адаптивная компоновка - когда ширина экрана меньше 600 пикселей, сделайте два столбца друг на друга, а не рядом друг с другом */
 @media screen and (max-width: 600px) {
     .column, input[type=submit] {
         width: 100%;
@@ -66,8 +67,8 @@ input[type=submit]:hover {
 </head>
 <body>
 
-<h2>Responsive Contact Section</h2>
-<p>Resize the browser window to see the effect.</p>
+<h2>Отзывчивый контактный раздел</h2>
+<p>Измените размер окна браузера, чтобы увидеть эффект.</p>
 
 <div class="container">
   <div style="text-align:center">
@@ -81,17 +82,17 @@ input[type=submit]:hover {
     <div class="column">
       <form action="/action_page.php">
         <label for="fname">First Name</label>
-        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+        <input type="text" id="fname" name="имя" placeholder="Ваше имя..">
         <label for="lname">Last Name</label>
-        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+        <input type="text" id="lname" name="Фамилия" placeholder="Ваша фамилия..">
         <label for="country">Country</label>
-        <select id="country" name="country">
-          <option value="australia">Australia</option>
-          <option value="canada">Canada</option>
-          <option value="usa">USA</option>
+        <select id="country" name="страна">
+          <option value="Russia">Россия</option>
+          <option value="canada">Канада</option>
+          <option value="usa">США</option>
         </select>
         <label for="subject">Subject</label>
-        <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
+        <textarea id="subject" name="subject" placeholder="Напиши что-нибудь.." style="height:170px"></textarea>
         <input type="submit" value="Submit">
       </form>
     </div>
