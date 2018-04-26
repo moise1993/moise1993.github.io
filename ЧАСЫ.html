@@ -1,236 +1,167 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
- <body>
-<script type="text/javascript">
+<head>
+<title>Horloge Analogique</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
 
-import java.applet.Applet;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
-import java.util.Calendar;
-
-class texte {
-    int x, y;        // Position du texte.
-    String texte;    // Le texte à afficher.
-    Color couleur;    // La couleur du texte à afficher.
+<body>
     
-    // Constructeur de la class Texte.
-    texte(int valX, int valY, String leTexte, Color coul) {
-        x = valX;
-        y = valY;
-        texte = leTexte;
-        couleur = coul;
-    }
-    // Méthode permettant l'affichage du texte.
-    void afficher(Graphics g) {
-        g.setColor(couleur);
-        g.drawString(texte, x, y);
-    }
-}
-
-public class horlogeAnal extends Applet implements Runnable {
-    volatile Thread timer;           // Processus léger actif
-    Font f;                          // Fonte du texte
-    Color texteColor;                 // Couleur du texte
-    Color fondColor;                // Couleur du fond de l'applet.
-    texte laDate;                    // Récupération des données pour afficher la date et l'heure actuelle.
-    String txtDate;
-    texte lHeure;
-    String txtHeure;
-    int format;
-    final static long tempo = 500;                // Temporisation. 1000 = 1s
-    
-    int pos_x, pos_y;                // Position du texte à afficher.
-    
-    int hh, mm, ss;                    // Récupération des heures, minutes et secondes.
-    int jourSemaine, jourMois, mois, annee;
-    
-    public static Color lesCouleur[] = {Color.BLACK,
-                                        Color.BLUE,
-                                        Color.CYAN,
-                                        Color.DARK_GRAY,
-                                        Color.GRAY,
-                                        Color.LIGHT_GRAY,
-                                        Color.GREEN,
-                                        Color.MAGENTA,
-                                        Color.ORANGE,
-                                        Color.PINK,
-                                        Color.RED,
-                                        Color.WHITE,
-                                        Color.YELLOW};
-    
-    public Color choixCouleur(int laCouleur) {
-        return lesCouleur[laCouleur];
-    }
-    
-    public void init() {        
-        try {            
-            f = new Font("Dialog", Font.PLAIN, 15);
-
-            // Récupération de l'entier en base 16 
-            // représentant la couleur du texte.
-            int colorT = Integer.parseInt(getParameter("textcolor"));
-            //texteColor = new Color(colorT);
-            
-            // Récupération de l'entier en base 16 
-            // représentant la couleur du fond.
-            int colorF = Integer.parseInt(getParameter("fondcolor"));
-            //fondColor = new Color(colorF);
-            
-            // Récupération de la formulation.
-            format = Integer.parseInt(getParameter("format"));
-            
-            texteColor = choixCouleur(colorT);
-               fondColor = choixCouleur(colorF);    
-            
-               setBackground(fondColor);
-            
-          } catch (Exception e) {
-              texteColor = Color.black;     // Texte noir par défaut 
-            fondColor = Color.white;     // Fond blanc par défaut.
-            setBackground(fondColor);
-            format = 4;
-          }
-    }
-    
-    public void paint(Graphics g) {        
-        g.setFont(f);
-        Rectangle2D rect2d;
-        Calendar now = Calendar.getInstance();
-        int hh = now.get(Calendar.HOUR_OF_DAY);            // On récupère l'heure.
-        int mm = now.get(Calendar.MINUTE);                // On récupère les minutes.
-        String min = "";
-        int ss = now.get(Calendar.SECOND);                // On récupère les secondes.
-        String sec = "";
-        int mois = now.get(Calendar.MONTH) + 1;            // On récupère le mois.
-        int jour= now.get(Calendar.DAY_OF_MONTH);        // On récupère le jour du mois.
-        int annee = now.get(Calendar.YEAR);                // On récupère l'année.
-        int nomJour = now.get(Calendar.DAY_OF_WEEK);    // On récupère le jour de la semaine.
-        String jourSemaine = "";            
-        // Traitement de l'information pour récupérer le nom du jour.
-        // Dimanche = 1, Lundi = 2, ..., Samedi = 7.
-           switch(nomJour) {
-               case 1:
-                   jourSemaine = "Dimanche";
-                   break;               
-               case 2:
-                   jourSemaine = "Lundi";
-                   break;               
-               case 3:
-                   jourSemaine = "Mardi";
-                   break;               
-               case 4:
-                   jourSemaine = "Mercredi";
-                   break;               
-               case 5:
-                   jourSemaine = "Jeudi";
-                   break;               
-               case 6:
-                   jourSemaine = "Vendredi";
-                   break;               
-               case 7:
-                   jourSemaine = "Samedi";
-                   break;
-           }
-           
-           FontMetrics fm=getFontMetrics(getFont());
-           
-           txtHeure = "";
-           txtDate = "";
-           
-           if(ss < 10)
-               sec = "0" + ss;
-           else
-               sec = ss + "";
-           
-           if(mm < 10)
-               min = "0" + mm;
-           else
-               min = mm + "";
-           
-        switch(format) {
-           case 0:    // Affiche du format hh:mm.
-               txtHeure = hh + ":" + min;
-               pos_x = (getSize().width - fm.stringWidth(txtHeure)) / 2;
-               pos_y = (getSize().height + fm.getHeight()) / 2 ;
-               lHeure = new texte(pos_x, pos_y, txtHeure, texteColor);
-               rect2d = fm.getStringBounds(txtHeure, g);
-               lHeure.afficher(g);
-               break;
-           case 1:    // Affichage du format Il est hh:mm:ss.
-               txtHeure = "Il est " + hh + ":" + min + ":" + sec;
-               pos_x = (getSize().width - fm.stringWidth(txtHeure)) / 2;
-               pos_y = (getSize().height + fm.getHeight()) / 2 ;
-               lHeure = new texte(pos_x, pos_y, txtHeure, texteColor);
-               lHeure.afficher(g);
-               break;
-           case 2:    // Affichage de la date selon le format jour/mois/année.
-               txtDate = jour + "/" + mois + "/" + annee;
-               pos_x = (getSize().width - fm.stringWidth(txtDate)) / 2;
-               pos_y = (getSize().height + fm.getHeight()) / 2 ;
-               laDate = new texte(pos_x, pos_y, txtDate, texteColor);
-               laDate.afficher(g);
-               break;
-           case 3: // Affichage de la date selon le format jourSemaine jour/mois/année.
-               txtDate = "Nous sommes le " + jourSemaine + jour + "/" + mois + "/" + annee;
-               pos_x = (getSize().width - fm.stringWidth(txtDate)) / 2;
-               pos_y = (getSize().height + fm.getHeight()) / 2 ;
-               laDate = new texte(pos_x, pos_y, txtDate, texteColor);
-               laDate.afficher(g);
-               break;
-           case 4: // Affichage complet de la date et de l'heure.
-               txtHeure = "Il est " + hh + ":" + min + ":" + sec;
-               pos_x = (getSize().width - fm.stringWidth(txtHeure)) / 2;
-               pos_y = ((getSize().height + fm.getHeight()) / 2 ) + fm.getHeight() / 2;
-               lHeure = new texte(pos_x, pos_y, txtHeure, texteColor);
-               lHeure.afficher(g);
-               txtDate = "Nous sommes le " + jourSemaine+ " " + jour + "/" + mois + "/" + annee;
-               pos_x = (getSize().width - fm.stringWidth(txtDate)) / 2;
-               pos_y = ((getSize().height + fm.getHeight()) / 2) - fm.getHeight() / 2;
-               laDate = new texte(pos_x, pos_y, txtDate, texteColor);
-               laDate.afficher(g);
-               break;
-        }
-    }
-    
-    /**
-      * Création d'un nouveau processus léger de mise à jour.
-      */
-    public void start() {
-        timer = new Thread(this);
-        timer.start();
-    }
-    
-    /**
-      * Rafraîchissement de l'heure.
-      */
-    public void run() {
-        try {
-            Thread t = Thread.currentThread();
-            while (timer == t) { // En cas de start() multiples
-                t.sleep(tempo);
-              
-            // Appel à la méthode paint() sur le bon contexte graphique
-            repaint();
-            }
-        } catch (InterruptedException e) { }
-      }
-      
-      /**
-       * Demande l'arrêt du processus léger de mise à jour.
-       */
-      public void stop() {
-          timer.interrupt();
-      }
-      
-      public String getAppletInfo() {
-        return new String("Titre: Horloge \n" +
-                          "Author: Moise Mabouh\n" +
-                             "Simple horloge textuelle.");
-      }
-}
-</script>
+<h1 align="center">.:: Horloge analogique ::.</h1>
+<p>Voici une applet permetant de présenter l'heure où la date de 
+  différentes façon. Les différents affichages se font par 
+  le bias de paramètres à envoyer à l'applet.</p>
+<p align="center"> 
+  <applet code="horlogeAnal.class" width="300" height="50" class="">
+    <param name="textcolor" value="7">
+    <param name="fondcolor" value="0">
+    <param name="format" value="4">
+  </applet>
+</p>
+<table width="100%" border="0">
+  <tr>
+    <td bgcolor="#6666FF"><strong><font color="#FFCC00">Comment utiliser cette 
+      applet.</font></strong></td>
+  </tr>
+</table>
+<p>1. Télécharger le fichier horlogeAnalogique.<br>
+  2. Décompresser le fichier téléchargé dans le répertoire 
+  ou se trouve la page HTML ou sera afficher l'applet. Vous obtiendrez 3 fichiers.</p>
+<ul>
+  <li>Le fichier horlogeAnal.java: La source de l'applet.</li>
+  <li>Le fichier horlogeAnal.class: Le fichier compilé de l'applet.</li>
+  <li>La page HTML qui vous présente cette applet.</li>
+</ul>
+<p>3. Incorporez l'exemple de code dans votre page HTML :</p>
+<p><cite><dfn>    <font color="#000099" face="Arial, Helvetica, sans-serif"><applet 
+  code="</font><font color="#6666FF" face="Arial, Helvetica, sans-serif"><font color="#3333FF">horlogeAnal.class</font><font color="#000099">" 
+  width="</font>300<font color="#000099">" height="</font>50<font color="#000099">"></font><br>
+          <font color="#000099"><param 
+  name="</font>textcolor<font color="#000099">" value="</font>7<font color="#000099">"></font><br>
+          <font color="#000099"><param 
+  name="</font>fondcolor<font color="#000099">" value="</font>0<font color="#000099">"></font><br>
+          <font color="#000099"><param 
+  name="</font>format<font color="#000099">" value="</font>4<font color="#000099">"></font><br>
+      <font color="#000099"></applet></font></font></dfn></cite></p>
+<p>4. Explication des paramètres.</p>
+<p><strong>Paramètre textecolor et fondcolor:</strong></p>
+<div align="center">
+  <table width="100%" border="1" cellpadding="0" bordercolor="#000000">
+    <tr bgcolor="#6666FF"> 
+      <td width="127" bgcolor="#6666FF"><strong><font color="#FFCC00">Valeur:</font></strong></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>0</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>1</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>2</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>3</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>4</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>5</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>6</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>7</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>8</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>9</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>10</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>11</strong></font></div></td>
+      <td width="50"> <div align="center"><font color="#FFCC00"><strong>12</strong></font></div></td>
+    </tr>
+    <tr> 
+      <td width="127" bgcolor="#6666FF"><strong><font color="#FFCC00">Description:</font></strong></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Noir</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Bleu</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Cyan</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Gris 
+          foncé</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Gris</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Gris 
+          clair</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Vert</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Magenta</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Orange</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Rose</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Rouge</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Blanc</strong></div></td>
+      <td width="50"> <div align="center"><strong style="font-weight: 400">Jaune</strong></div></td>
+    </tr>
+    <tr> 
+      <td width="127" bgcolor="#6666FF"><strong><font color="#FFCC00">La couleur:</font></strong></td>
+      <td width="50" bgcolor="#000000"> </td>
+      <td width="50" bgcolor="#0000FF"> </td>
+      <td width="50" bgcolor="#00FFFF"> </td>
+      <td width="50" bgcolor="#666666"> </td>
+      <td width="50" bgcolor="#999999"> </td>
+      <td width="50" bgcolor="#CCCCCC"> </td>
+      <td width="50" bgcolor="#00FF00"> </td>
+      <td width="50" bgcolor="#FF00FF"> </td>
+      <td width="50" bgcolor="#FF9933"> </td>
+      <td width="50" bgcolor="#FFC0CB"> </td>
+      <td width="50" bgcolor="#FF0000"> </td>
+      <td width="50"> </td>
+      <td width="50" bgcolor="#FFFF00"> </td>
+    </tr>
+  </table>
+</div>
+<p><strong>Paramètre format:</strong></p>
+<div align="center">
+  <table width="600" border="1" cellpadding="0" bordercolor="#000000">
+    <tr bgcolor="#6666FF"> 
+      <td width="25%"> 
+        <div align="center"><font color="#FFCC00"><strong>Valeur:</strong></font></div></td>
+      <td width="75%"> 
+        <div align="center"><font color="#FFCC00"><strong>Résultat</strong></font></div></td>
+    </tr>
+    <tr> 
+      <td><div align="center"><strong>0</strong></div></td>
+      <td><div align="center"> 
+          <applet code="horlogeAnal.class" width="300" height="50" class="">
+            <param name="textcolor" value="8">
+            <param name="fondcolor" value="0">
+            <param name="format" value="0">
+          </applet>
+        </div></td>
+    </tr>
+    <tr> 
+      <td><div align="center"><strong>1</strong></div></td>
+      <td><div align="center"> 
+          <applet code="horlogeAnal.class" width="300" height="50" class="">
+            <param name="textcolor" value="9">
+            <param name="fondcolor" value="0">
+            <param name="format" value="1">
+          </applet>
+        </div></td>
+    </tr>
+    <tr> 
+      <td><div align="center"><strong>2</strong></div></td>
+      <td><div align="center"> 
+          <applet code="horlogeAnal.class" width="300" height="50" class="">
+            <param name="textcolor" value="6">
+            <param name="fondcolor" value="0">
+            <param name="format" value="2">
+          </applet>
+        </div></td>
+    </tr>
+    <tr> 
+      <td><div align="center"><strong>3</strong></div></td>
+      <td><div align="center"> 
+          <applet code="horlogeAnal.class" width="300" height="50" class="">
+            <param name="textcolor" value="2">
+            <param name="fondcolor" value="0">
+            <param name="format" value="3">
+          </applet>
+        </div></td>
+    </tr>
+    <tr> 
+      <td><div align="center"><strong>4</strong></div></td>
+      <td><div align="center"> 
+          <applet code="horlogeAnal.class" width="300" height="50" class="">
+            <param name="textcolor" value="12">
+            <param name="fondcolor" value="0">
+            <param name="format" value="4">
+          </applet>
+        </div></td>
+    </tr>
+  </table>
+</div>
+<p> </p>
+<p>A vous de jouer maintenant.</p>
+<p> </p>
 </body>
-    </html>
+</html>
