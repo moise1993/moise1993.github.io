@@ -1,167 +1,27 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!doctype>
 <html>
-<head>
-<title>Horloge Analogique</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-</head>
-
-<body>
-    
-<h1 align="center">.:: Horloge analogique ::.</h1>
-<p>Voici une applet permetant de présenter l'heure où la date de 
-  différentes façon. Les différents affichages se font par 
-  le bias de paramètres à envoyer à l'applet.</p>
-<p align="center"> 
-  <applet code="horlogeAnal.class" width="300" height="50" class="">
-    <param name="textcolor" value="7">
-    <param name="fondcolor" value="0">
-    <param name="format" value="4">
-  </applet>
-</p>
-<table width="100%" border="0">
-  <tr>
-    <td bgcolor="#6666FF"><strong><font color="#FFCC00">Comment utiliser cette 
-      applet.</font></strong></td>
-  </tr>
-</table>
-<p>1. Télécharger le fichier horlogeAnalogique.<br>
-  2. Décompresser le fichier téléchargé dans le répertoire 
-  ou se trouve la page HTML ou sera afficher l'applet. Vous obtiendrez 3 fichiers.</p>
-<ul>
-  <li>Le fichier horlogeAnal.java: La source de l'applet.</li>
-  <li>Le fichier horlogeAnal.class: Le fichier compilé de l'applet.</li>
-  <li>La page HTML qui vous présente cette applet.</li>
-</ul>
-<p>3. Incorporez l'exemple de code dans votre page HTML :</p>
-<p><cite><dfn>    <font color="#000099" face="Arial, Helvetica, sans-serif"><applet 
-  code="</font><font color="#6666FF" face="Arial, Helvetica, sans-serif"><font color="#3333FF">horlogeAnal.class</font><font color="#000099">" 
-  width="</font>300<font color="#000099">" height="</font>50<font color="#000099">"></font><br>
-          <font color="#000099"><param 
-  name="</font>textcolor<font color="#000099">" value="</font>7<font color="#000099">"></font><br>
-          <font color="#000099"><param 
-  name="</font>fondcolor<font color="#000099">" value="</font>0<font color="#000099">"></font><br>
-          <font color="#000099"><param 
-  name="</font>format<font color="#000099">" value="</font>4<font color="#000099">"></font><br>
-      <font color="#000099"></applet></font></font></dfn></cite></p>
-<p>4. Explication des paramètres.</p>
-<p><strong>Paramètre textecolor et fondcolor:</strong></p>
-<div align="center">
-  <table width="100%" border="1" cellpadding="0" bordercolor="#000000">
-    <tr bgcolor="#6666FF"> 
-      <td width="127" bgcolor="#6666FF"><strong><font color="#FFCC00">Valeur:</font></strong></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>0</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>1</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>2</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>3</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>4</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>5</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>6</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>7</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>8</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>9</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>10</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>11</strong></font></div></td>
-      <td width="50"> <div align="center"><font color="#FFCC00"><strong>12</strong></font></div></td>
-    </tr>
-    <tr> 
-      <td width="127" bgcolor="#6666FF"><strong><font color="#FFCC00">Description:</font></strong></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Noir</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Bleu</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Cyan</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Gris 
-          foncé</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Gris</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Gris 
-          clair</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Vert</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Magenta</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Orange</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Rose</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Rouge</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Blanc</strong></div></td>
-      <td width="50"> <div align="center"><strong style="font-weight: 400">Jaune</strong></div></td>
-    </tr>
-    <tr> 
-      <td width="127" bgcolor="#6666FF"><strong><font color="#FFCC00">La couleur:</font></strong></td>
-      <td width="50" bgcolor="#000000"> </td>
-      <td width="50" bgcolor="#0000FF"> </td>
-      <td width="50" bgcolor="#00FFFF"> </td>
-      <td width="50" bgcolor="#666666"> </td>
-      <td width="50" bgcolor="#999999"> </td>
-      <td width="50" bgcolor="#CCCCCC"> </td>
-      <td width="50" bgcolor="#00FF00"> </td>
-      <td width="50" bgcolor="#FF00FF"> </td>
-      <td width="50" bgcolor="#FF9933"> </td>
-      <td width="50" bgcolor="#FFC0CB"> </td>
-      <td width="50" bgcolor="#FF0000"> </td>
-      <td width="50"> </td>
-      <td width="50" bgcolor="#FFFF00"> </td>
-    </tr>
-  </table>
-</div>
-<p><strong>Paramètre format:</strong></p>
-<div align="center">
-  <table width="600" border="1" cellpadding="0" bordercolor="#000000">
-    <tr bgcolor="#6666FF"> 
-      <td width="25%"> 
-        <div align="center"><font color="#FFCC00"><strong>Valeur:</strong></font></div></td>
-      <td width="75%"> 
-        <div align="center"><font color="#FFCC00"><strong>Résultat</strong></font></div></td>
-    </tr>
-    <tr> 
-      <td><div align="center"><strong>0</strong></div></td>
-      <td><div align="center"> 
-          <applet code="horlogeAnal.class" width="300" height="50" class="">
-            <param name="textcolor" value="8">
-            <param name="fondcolor" value="0">
-            <param name="format" value="0">
-          </applet>
-        </div></td>
-    </tr>
-    <tr> 
-      <td><div align="center"><strong>1</strong></div></td>
-      <td><div align="center"> 
-          <applet code="horlogeAnal.class" width="300" height="50" class="">
-            <param name="textcolor" value="9">
-            <param name="fondcolor" value="0">
-            <param name="format" value="1">
-          </applet>
-        </div></td>
-    </tr>
-    <tr> 
-      <td><div align="center"><strong>2</strong></div></td>
-      <td><div align="center"> 
-          <applet code="horlogeAnal.class" width="300" height="50" class="">
-            <param name="textcolor" value="6">
-            <param name="fondcolor" value="0">
-            <param name="format" value="2">
-          </applet>
-        </div></td>
-    </tr>
-    <tr> 
-      <td><div align="center"><strong>3</strong></div></td>
-      <td><div align="center"> 
-          <applet code="horlogeAnal.class" width="300" height="50" class="">
-            <param name="textcolor" value="2">
-            <param name="fondcolor" value="0">
-            <param name="format" value="3">
-          </applet>
-        </div></td>
-    </tr>
-    <tr> 
-      <td><div align="center"><strong>4</strong></div></td>
-      <td><div align="center"> 
-          <applet code="horlogeAnal.class" width="300" height="50" class="">
-            <param name="textcolor" value="12">
-            <param name="fondcolor" value="0">
-            <param name="format" value="4">
-          </applet>
-        </div></td>
-    </tr>
-  </table>
-</div>
-<p> </p>
-<p>A vous de jouer maintenant.</p>
-<p> </p>
-</body>
-</html>
+<div class="wrapper">
+        <div class="cadran">
+            <div class="reperes"></div>
+            <div class="centre"></div>
+            <div class="minutes">
+                <svg height="250" width="16">
+                    <polygon points="6,4 8,0 10,4 16,230 8,250 0,230" style="fill:black" />
+                   
+                </svg>
+            </div>
+            <div class="heures">
+                <svg height="190" width="20">
+                    <polygon points="7,4 10,0 13,4 20,170 10,190 0,170" style="fill:white;stroke:black;stroke-width:1" />
+                    
+                </svg>
+            </div>
+            <div class="secondes">
+                <svg height="255" width="10">
+                    <polygon points="4,0 6,0 10,235 5,255 0,235" style="fill:red;stroke:purple;stroke-width:0" />
+                   
+                </svg>
+            </div>
+        </div>
+    </div>
+    </html>
